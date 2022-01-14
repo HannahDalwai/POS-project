@@ -1,9 +1,9 @@
 let cart = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.getItem("cart")) : [];
 
-function showcart(cart){
+function displaycart(cart){
     document.querySelector("#cart").innerHTML = "";
 
-    cart.forEach((cart, index) => {
+    cart.forEach((cart, position) => {
         document.querySelector("#cart").innerHTML += `
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
@@ -15,10 +15,10 @@ function showcart(cart){
                     <h5 class="card-title" id="title">${cart.title}</h5>
                     <p class="card-text" id="price">R${cart.price}</p>
                     <div>
-                        <input type="number" name="Quantity" class="form-control mb-2" id="quantity${index}" min="1" value="${cart.qty}" onchange="updateCart(${index})">
+                        <input type="number" name="Quantity" class="form-control mb-2" id="quantity${position}" min="1" value="${cart.qty}" onchange="updateCart(${position})">
                     <div/>
                     <p>Total = R${parseInt(cart.qty * cart.price)}</p>
-                    <button class="btn btn-danger mt-2" onclick="removeProduct(${index})">Remove</button>
+                    <button class="btn btn-danger mt-2" onclick="deleteProduct(${position})">Remove</button>
                 </div>
                 </div>
             </div>
@@ -32,21 +32,21 @@ function showcart(cart){
     
 }
 
-showcart(cart);
+displaycart(cart);
 
 
-function updateCart(index){
-    let qty = document.querySelector(`#quantity${index}`).value;
+function updateCart(position){
+    let qty = document.querySelector(`#quantity${position}`).value;
 
-    cart[index] = { ...cart[index], qty};
+    cart[position] = { ...cart[position], qty};
     localStorage.setItem("cart", JSON.stringify(cart));
-    showcart(cart);
+    displaycart(cart);
 }
 
-function removeProduct(index){
-    cart.splice(index, 1);
+function deleteProduct(position){
+    cart.splice(position, 1);
     localStorage.setItem("cart", JSON.stringify(cart));
-    showcart(cart);
+    displaycart(cart);
 }
 
 function calculateTotal(){
@@ -57,4 +57,3 @@ function calculateTotal(){
     return total;
 }
 // console.log(calculateTotal());
-

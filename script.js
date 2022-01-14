@@ -30,10 +30,10 @@ let cart = JSON.parse(localStorage.getItem("cart")) ? JSON.parse(localStorage.ge
 console.log(products);
 
 
-function showProducts(products){
+function displayProducts(products){
     document.querySelector("#products").innerHTML = "";
 
-    products.forEach((product, index) => {
+    products.forEach((product, position) => {
         document.querySelector("#products").innerHTML += `
         <div class="card d-inline-flex p-2 bd-highlight" style="width: 18rem;">
         <img id="img" class="card-img-top" src="${product.img}" alt="Card image cap">
@@ -43,15 +43,15 @@ function showProducts(products){
             <p id="price" class="card-text">R${product.price}</p>
             <div>
                 Quantity:
-                <input type="number" name="Quantity" class="form-control mb-2" id="quantity${index}" min="1" value="1">
+                <input type="number" name="Quantity" class="form-control mb-2" id="quantity${position}" min="1" value="1">
             <div/>
-            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal${index}">Edit</button>
-            <button class="btn btn-danger" onclick="deleteProduct(${index})">Delete</button>
-            <button class="btn btn-success mt-1" onclick="addToCart(${index})">Add to cart</button>
+            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal${position}">Edit</button>
+            <button class="btn btn-danger" onclick="deleteProduct(${position})">Delete</button>
+            <button class="btn btn-success mt-1" onclick="addToCart(${position})">Add to cart</button>
         </div>
         </div>
     
-        <div class="modal fade" id="editModal${index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editModal${position}" tabposition="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -60,17 +60,17 @@ function showProducts(products){
                     </div>
                     <div class="modal-body">
                         <label for="continrnt">Image:</label>
-                        <input type="text" class="form-control w-50 mb-2" id="imgEdit${index}" placeholder="Image URL" autofocus  value="${product.img}"><br>
+                        <input type="text" class="form-control w-50 mb-2" id="imgEdit${position}" placeholder="Image URL" autofocus  value="${product.img}"><br>
                         <label for="continrnt">Title:</label>
-                        <input type="text" class="form-control w-50 mb-2" id="titleEdit${index}" placeholder="Enter title" value="${product.title}"><br>
+                        <input type="text" class="form-control w-50 mb-2" id="titleEdit${position}" placeholder="Enter title" value="${product.title}"><br>
                         <label for="continrnt">Category:</label>
-                        <input type="text" class="form-control w-50 mb-2" id="categoryEdit${index}" placeholder="Enter category" value="${product.category}"><br>
+                        <input type="text" class="form-control w-50 mb-2" id="categoryEdit${position}" placeholder="Enter category" value="${product.category}"><br>
                         <label for="continrnt">Price:</label>
-                        <input type="text" class="form-control w-50 mb-2" id="priceEdit${index}" placeholder="Enter price" value="${product.price}">
+                        <input type="text" class="form-control w-50 mb-2" id="priceEdit${position}" placeholder="Enter price" value="${product.price}">
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="updateProduct(${index})">Edit product</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="updateProduct(${position})">Edit product</button>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@ function showProducts(products){
         `;
     });
 }
-showProducts(products);
+displayProducts(products);
 
 function createProduct(){
     let img = document.querySelector("#img").value;
@@ -93,57 +93,57 @@ function createProduct(){
         img
     })
     localStorage.setItem("products", JSON.stringify(products))
-    showProducts(products);
+    displayProducts(products);
 }
 
-function deleteProduct(index){
-    products.splice(index, 1);
+function deleteProduct(position){
+    products.splice(position, 1);
     localStorage.setItem("products", JSON.stringify(products))
-    showProducts(products);
+    displayProducts(products);
 }
 
-function updateProduct(index){
-    let img = document.querySelector(`#imgEdit${index}`).value;
-    let title = document.querySelector(`#titleEdit${index}`).value;
-    let category = document.querySelector(`#categoryEdit${index}`).value;
-    let price = document.querySelector(`#priceEdit${index}`).value;
-        products[index] = {
+function updateProduct(position){
+    let img = document.querySelector(`#imgEdit${position}`).value;
+    let title = document.querySelector(`#titleEdit${position}`).value;
+    let category = document.querySelector(`#categoryEdit${position}`).value;
+    let price = document.querySelector(`#priceEdit${position}`).value;
+        products[position] = {
             title: title,
             category,
             price,
             img
             };
         localStorage.setItem("products", JSON.stringify(products))
-        showProducts(products);
+        displayProducts(products);
 }
 
 
-function addToCart(index){
-    let qty = document.querySelector(`#quantity${index}`).value;
+function addToCart(position){
+    let qty = document.querySelector(`#quantity${position}`).value;
     let added = false;
 
     cart.forEach((product) => {
-        if(product.title == products[index].title){
-            alert(`You have added ${qty}  ${products[index].title} to the cart`);
+        if(product.title == products[position].title){
+            alert(`You have added ${qty}  ${products[position].title} to the cart`);
             product.qty = parseInt(product.qty) + parseInt(qty);
             added = true;
             localStorage.setItem("cart", JSON.stringify(cart))
         }
     });
     if(!added){
-        alert(`You have added ${qty}  ${products[index].title} to the cart`);
-        cart.push({ ...products[index], qty});
+        alert(`You have added ${qty}  ${products[position].title} to the cart`);
+        cart.push({ ...products[position], qty});
         console.log(cart);
         localStorage.setItem("cart", JSON.stringify(cart))
     }
-   showcart(cart);
+   displaycart(cart);
 }
 
 function categorySort(){
     let category = document.querySelector("#categorySort").value;
 
     if(category == "All"){
-        showProducts(products);
+        displayProducts(products);
         return;
     }
 
@@ -151,7 +151,7 @@ function categorySort(){
         return product.category == category;
     }));
 
-    showProducts(fltrdCat);
+    displayProducts(fltrdCat);
 }
 
 function priceSort() {
@@ -162,7 +162,7 @@ function priceSort() {
     console.log(sortedProducts);
   
     if (direction == "Descending") sortedProducts.reverse();
-    showProducts(sortedProducts);
+    displayProducts(sortedProducts);
   }
   
   
@@ -181,6 +181,6 @@ function priceSort() {
     if (direction == "Descending") sortedProducts.reverse();
     console.log(sortedProducts);
    
- showProducts(products);
+ displayProducts(products);
   }
 
