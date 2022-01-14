@@ -31,38 +31,6 @@ console.log(products);
 
 
 
-document.getElementById("navbar").innerHTML += `
-
-<nav class="navbar navbar-light bg-light">
-<div class="container-fluid">
-  <aclass="navbar-brand">Stationary</aclass=>
-    <button  id="" class="btn btn-outline-success" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
-</div>
-</nav>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body"> 
-
-      <input class="form-control w-50 mb-2" type="text">
-      <input class="form-control w-50 mb-2" type="text" type="text">
-      <input class="form-control w-50 mb-2" type="text"type="text">
-      <input class="form-control w-50 mb-2" type="text" type="text">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-`;
 
 
 
@@ -76,11 +44,36 @@ function displayProduct(products){
             <div class="card-body">
                 <h4 class="card-title">${product.title}</h4>
                 <h6>R ${product.price}</h6>
-                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal${position}" style"margin-left: 80px;"><i class='bx bxs-pencil'></i></button>
-                <button class="btn btn-danger" onclick="deleteTask(${position})">Delete</button>
+                <button class="btn btn-secondary" data-bs-toggle="modal"  data-bs-toggle="modal" data-bs-target="#Modal${position}" style"margin-left: 80px;"><i class='bx bxs-pencil'></i></button>
+                <button class="btn btn-danger" onclick="deleteProduct(${position})">Delete</button>
             </div>
         </div>
-                        
+           
+
+
+<div class="modal fade" id="Modal${position}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="Modal${position}"">Modal title</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body"> 
+
+    <input class="form-control w-50 mb-2" type="text" placeholder="Image URL">
+        <input class="form-control w-50 mb-2" type="text" type="text" placeholder="Title">
+        <input class="form-control w-50 mb-2" type="text"type="text" placeholder="Category">
+        <input class="form-control w-50 mb-2" type="text" type="text" placeholder="Price">
+  
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button  onclick=" createProduct"type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
+</div>
+</div>             
         
         `;
     });
@@ -100,11 +93,12 @@ function createProduct(){
     try {
         if(!product)throw new Error("Please add product")
         products.push({
-            name:product,
-            category
+            name:img,
+            title,
+            category,
+            price
          });
 
-         localStorage.setItem("products", JSON.stringify(products));
         displayProduct(products);
     } catch (error) {
         alert(error)
@@ -114,7 +108,6 @@ function createProduct(){
 function deleteProduct(position){
     products.splice(position, 1);
 
-    localStorage.setItem("products", JSON.stringify(products));
     displayProduct(products);
 }
 
@@ -125,10 +118,11 @@ function updateProduct(position){
     try {
         if(!product)throw new Error("Please add product when you update")
         products[position] = {
-            name:product,
-            category
+            name:img,
+            title,
+            category,
+            price
          };
-         localStorage.setItem("products", JSON.stringify(products));
         displayProduct(products);
     } catch (error) {
         alert(error)
