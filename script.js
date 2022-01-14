@@ -92,14 +92,14 @@ function createProduct(){
         price,
         img
     })
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("products", JSON.stringify(products));
     displayProducts(products);
 }
 
 // DELETE
 function deleteProduct(position){
     products.splice(position, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("products", JSON.stringify(products));
     displayProducts(products);
 }
 
@@ -115,6 +115,6 @@ function updateProduct(position){
             price,
             img
             };      
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+        localStorage.setItem("products", JSON.stringify(products));
         displayProducts(products);
 }
