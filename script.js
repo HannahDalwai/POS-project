@@ -1,4 +1,5 @@
-let products = JSON.parse(localStorage.getItem("products")) ? JSON.parse(localStorage.getItem("products")):
+let products = JSON.parse(localStorage.getItem("products")) 
+? JSON.parse(localStorage.getItem("products")):
  [
 {
 title:"Watercolour set",
@@ -29,14 +30,18 @@ img:"https://i.postimg.cc/cJ4jNbG7/brushes.jpg"
 ];
 console.log(products);
 
+let cart =  JSON.parse(localStorage.getItem("cart"))
+ ? JSON.parse(localStorage.getItem("cart")): [];
+ 
 // READ
 
 function displayProducts(products){
     document.querySelector("#products").innerHTML = "";
 
     products.forEach((product, position) => {
-        document.querySelector("#products").innerHTML += `
-
+        document.querySelector("#products").innerHTML += 
+        // CARD AND UPDATE/EDIT MODAL
+        `
         <div class="card d-inline-flex p-2 bd-highlight" style="width: 18rem;">
         <img id="img" class="card-img-top" src="${product.img}" alt="Card image cap">
         <div class="card-body">
@@ -45,6 +50,8 @@ function displayProducts(products){
             <p id="price" class="card-text">R${product.price}</p>
             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal${position}">Edit</button>
             <button class="btn btn-danger" onclick="deleteProduct(${position})">Delete</button>
+            <button class="btn btn-danger" onclick="addToCart(${position})">Add to cart</button>
+
         </div>
         </div>
 
@@ -117,4 +124,10 @@ function updateProduct(position){
             };      
         localStorage.setItem("products", JSON.stringify(products));
         displayProducts(products);
+}
+// ADD TO CART
+function addToCart(position){
+cart.push(products[positon]);
+console.log(cart);
+localStorage.setItem("cart", JSON.stringify(cart))
 }
