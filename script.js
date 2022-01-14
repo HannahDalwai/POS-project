@@ -50,7 +50,7 @@ function displayProducts(products){
             <p id="price" class="card-text">R${product.price}</p>
             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal${position}">Edit</button>
             <button class="btn btn-danger" onclick="deleteProduct(${position})">Delete</button>
-            <button class="btn btn-danger" onclick="addToCart(${position})">Add to cart</button>
+            <button class="btn btn-secondary" onclick="addToCart(${position})">Add to cart</button>
 
         </div>
         </div>
@@ -127,7 +127,7 @@ function updateProduct(position){
 }
 // ADD TO CART
 function addToCart(position){
-cart.push(products[positon]);
+cart.push(products[position])
 console.log(cart);
 localStorage.setItem("cart", JSON.stringify(cart))
 }
