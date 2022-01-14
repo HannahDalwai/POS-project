@@ -99,8 +99,8 @@ function checkout() {
       localStorage.removeItem("cart");
       readCart(cart);
     }
-  } c
-atch (err) {
+  } 
+catch (err) {
     alert(err);
   }
 }
