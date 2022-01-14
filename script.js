@@ -25,7 +25,7 @@ title:" Paint brushes 10pcs",
 category:"Paint",
 price:"55.00",
 img:"https://i.postimg.cc/cJ4jNbG7/brushes.jpg"
-},    
+},
 ];
 console.log(products);
 
