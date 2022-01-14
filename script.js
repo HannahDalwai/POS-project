@@ -30,7 +30,7 @@ let cart = JSON.parse(localStorage.getItem("cart"))
   : [];
 
 // READ
-function readProducts(products) {
+function displayProducts(products) {
   document.querySelector("#products").innerHTML = "";
   products.forEach((product, position) => {
     document.querySelector("#products").innerHTML += `
@@ -48,8 +48,8 @@ function readProducts(products) {
           
           </div>
           <div class="d-flex justify-content-end card-footer">
-            <button type="button" class="btn btn-primary w-50" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
-              Edit
+            <button type="button" class="btn btn-primary w-50" data-bs-toggle="modal" data-bs-target="#Product${position}" >
+              
             </button>
             <button type="button" class="btn btn-danger w-50 ms-3" onclick="deleteProduct(${position})" >
               Delete
@@ -58,7 +58,7 @@ function readProducts(products) {
       </div>
       <div
                 class="modal fade"
-                id="editProduct${position}"
+                id="Product${position}"
                 tabindex="-1"
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
@@ -67,7 +67,7 @@ function readProducts(products) {
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">
-                        Edit ${product.title}
+                         ${product.title}
                       </h5>
                       <button
                         type="button"
@@ -78,21 +78,21 @@ function readProducts(products) {
                     </div>
                     <div class="modal-body">
                       <div class="mb-3">
-                        <label for="editTitle${position}" class="form-label">Title</label>
+                        <label for="Title${position}" class="form-label">Title</label>
                         <input
                           class="form-control"
                           type="text"
-                          name="editTitle${position}"
-                          id="editTitle${position}"
+                          name="Title${position}"
+                          id="Title${position}"
                           value="${product.title}"
                         />
                       </div>
                       <div class="mb-3">
-                        <label for="editCategory${position}" class="form-label">Category</label>
+                        <label for="Category${position}" class="form-label">Category</label>
                         <select
                           class="form-select"
-                          name="editCategory${position}"
-                          id="editCategory${position}"
+                          name="Category${position}"
+                          id="Category${position}"
                         >
                           <option value="Fruit">Fruit</option>
                           <option value="Vegetables">Vegetables</option>
@@ -100,22 +100,22 @@ function readProducts(products) {
                         </select>
                       </div>
                       <div class="mb-3">
-                        <label for="editPrice${position}" class="form-label">Price</label>
+                        <label for="Price${position}" class="form-label">Price</label>
                         <input
                           class="form-control"
                           type="text"
-                          name="editPrice${position}"
-                          id="editPrice${position}"
+                          name="Price${position}"
+                          id="Price${position}"
                           value="${product.price}"
                         />
                       </div>
                       <div class="mb-3">
-                        <label for="editImg${position}" class="form-label">Image URL</label>
+                        <label for="Img${position}" class="form-label">Image URL</label>
                         <input
                           class="form-control"
                           type="text"
-                          name="editImg${position}"
-                          id="editImg${position}"
+                          name="Img${position}"
+                          id="Img${position}"
                           value="${product.img}"
                         />
                       </div>
@@ -144,7 +144,7 @@ function readProducts(products) {
   });
 }
 
-readProducts(products);
+displayProducts(products);
 showCartBadge();
 
 // CREATE
@@ -163,7 +163,7 @@ function createProduct() {
       img,
     });
     localStorage.setItem("products", JSON.stringify(products));
-    readProducts(products);
+    displayProducts(products);
   } catch (err) {
     alert(err);
   }
@@ -171,10 +171,10 @@ function createProduct() {
 
 // UPDATE
 function updateProduct(position) {
-  let title = document.querySelector(`#editTitle${position}`).value;
-  let category = document.querySelector(`#editCategory${position}`).value;
-  let price = document.querySelector(`#editPrice${position}`).value;
-  let img = document.querySelector(`#editImg${position}`).value;
+  let title = document.querySelector(`#Title${position}`).value;
+  let category = document.querySelector(`#Category${position}`).value;
+  let price = document.querySelector(`#Price${position}`).value;
+  let img = document.querySelector(`#IMG${position}`).value;
 
   try {
     if (!title || !price || !img) throw new Error("Please fill in all fields");
@@ -185,7 +185,7 @@ function updateProduct(position) {
       img,
     };
     localStorage.setItem("products", JSON.stringify(products));
-    readProducts(products);
+    displayProducts(products);
   } catch (err) {
     alert(err);
   }
@@ -200,7 +200,7 @@ function deleteProduct(position) {
   if (confirmation) {
     products.splice(position, 1);
     localStorage.setItem("products", JSON.stringify(products));
-    readProducts(products);
+    displayProducts(products);
   }
 }
 
@@ -239,14 +239,14 @@ function sortCategory() {
   let category = document.querySelector("#sortCategory").value;
 
   if (category == "All") {
-    return readProducts(products);
+    return displayProducts(products);
   }
 
   let foundProducts = products.filter((product) => {
     return product.category == category;
   });
 
-  readProducts(foundProducts);
+  displayProducts(foundProducts);
   console.log(foundProducts);
 }
 
@@ -266,7 +266,7 @@ function sortName() {
   });
   if (direction == "descending") sortedProducts.reverse();
   console.log(sortedProducts);
-  readProducts(products);
+  displayProducts(products);
 }
 
 // SORT BY PRICE
@@ -279,6 +279,6 @@ function sortPrice() {
   console.log(sortedProducts);
 
   if (direction == "descending") sortedProducts.reverse();
-  readProducts(sortedProducts);
+  displayProducts(sortedProducts);
 }
 
