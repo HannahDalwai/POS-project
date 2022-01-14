@@ -1,4 +1,5 @@
-let products = [
+let products = JSON.parse(localStorage.getItem("products")) ? JSON.parse(localStorage.getItem("products")):
+ [
 {
 title:"Watercolour set",
 category:"Paint",
@@ -25,7 +26,7 @@ category:"Paint",
 price:"55.00",
 img:"https://i.postimg.cc/cJ4jNbG7/brushes.jpg"
 },    
-]
+];
 console.log(products);
 
 // READ
@@ -91,12 +92,14 @@ function createProduct(){
         price,
         img
     })
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     displayProducts(products);
 }
 
 // DELETE
 function deleteProduct(position){
     products.splice(position, 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     displayProducts(products);
 }
 
@@ -111,6 +114,7 @@ function updateProduct(position){
             category,
             price,
             img
-            };
+            };      
+        localStorage.setItem("tasks", JSON.stringify(tasks));
         displayProducts(products);
 }
