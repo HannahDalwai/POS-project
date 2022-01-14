@@ -8,49 +8,76 @@
   
  </head>
  <body>
-     <!-- navbar -->
-<div id="navbar">  
-    <nav class="navbar navbar-light bg-light">
-        <div class="container-fluid">
-          <aclass="navbar-brand">Stationary</aclass=>
-            <button  id="" class="btn btn-outline-success" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
-        </div>
-        </nav>
-</div>
-  
-<!-- ADD -->
-<div class="modal fade" id="exampleModal" tabposition="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add a new product</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body"> 
-  
-        <input id="img" class="form-control w-50 mb-2" type="text" placeholder="Image URL">
-        <input id="title" class="form-control w-50 mb-2" type="text" type="text" placeholder="Title">
-        <input id="category" class="form-control w-50 mb-2" type="text"type="text" placeholder="Category">
-        <input id="price" class="form-control w-50 mb-2" type="text" type="text" placeholder="Price">
-  
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="createProduct()">Add</button>
-        </div>
-      </div>
+  <div class="header">
+    <a id="headerLogo" href="#default" class="logo">Shooo Shop!</a>
+    <div class="header-right">
+      <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#addModal">Add Product</button>
+      <a href="cart.html" class="btn btn-danger btn-lg">
+           <strong>Cart</strong>
+      </a>
     </div>
   </div>
+
   
+      <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <label for="continrnt">Image:</label>
+                    <input type="text" class="form-control w-50 mb-2" id="img" placeholder="Image URL" autofocus><br>
+                    <label for="continrnt">Title:</label>
+                    <input type="text" class="form-control w-50 mb-2" id="title" placeholder="Enter title"><br>
+                    <label for="continrnt">Category:</label>
+                    <input type="text" class="form-control w-50 mb-2" id="category" placeholder="Enter category"><br>
+                    <label for="continrnt">Price:</label>
+                    <input type="text" class="form-control w-50 mb-2" id="price" placeholder="Enter price">
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="createProduct()">Add product</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+  <div id="main-box" class="container">
+    <div>
+      <label for="" class="form-label">Sort by category</label>
+      <select name="categorySort" id="categorySort" class="form-select" onchange="categorySort()">
+        <option value="All">All</option>
+        <option value="Sneakers">Sneakers</option>
+        <option value="Boots">Boots</option>
+        <option value="Casual">Casual</option>
+        <option value="Flip Flops">Flip Flops</option>
+      </select>
+      <label for="" class="form-label">Sort by price</label>
+      <select name="priceSort" id="priceSort" class="form-select" onchange="priceSort()">
+        <option value=""></option>
+        <option value="Ascending">Ascending</option>
+        <option value="Descending">Descending</option>
+      </select>
+      <label for="" class="form-label">Sort by name</label>
+      <select name="sortName" id="sortName" class="form-select" onchange="sortName()">
+        <option value=""></option>
+        <option value="Ascending">Ascending</option>
+        <option value="Descending">Descending</option>
+      </select>
+    </div>
+      <div id="products">
+
+      </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+</html>
 
 
-    <!-- cards -->
-     <div class="container">
-        <ul id="products"></ul>
-     </div>
-    
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
  </body>
