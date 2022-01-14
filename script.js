@@ -46,7 +46,7 @@ function displayProducts(products){
             <button class="btn btn-danger" onclick="deleteProduct(${position})">Delete</button>
         </div>
         </div>
-    
+
         <div class="modal fade" id="editModal${position}" tabposition="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">

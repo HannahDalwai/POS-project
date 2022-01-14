@@ -18,7 +18,8 @@
         </div>
         </nav>
 </div>
-
+  
+<!-- ADD -->
 <div class="modal fade" id="exampleModal" tabposition="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -28,15 +29,15 @@
         </div>
         <div class="modal-body"> 
   
-        <input class="form-control w-50 mb-2" type="text" placeholder="Image URL">
-        <input class="form-control w-50 mb-2" type="text" type="text" placeholder="Title">
-        <input class="form-control w-50 mb-2" type="text"type="text" placeholder="Category">
-        <input class="form-control w-50 mb-2" type="text" type="text" placeholder="Price">
+        <input id="img" class="form-control w-50 mb-2" type="text" placeholder="Image URL">
+        <input id="title" class="form-control w-50 mb-2" type="text" type="text" placeholder="Title">
+        <input id="category" class="form-control w-50 mb-2" type="text"type="text" placeholder="Category">
+        <input id="price" class="form-control w-50 mb-2" type="text" type="text" placeholder="Price">
   
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-primary" onclick="createProduct()">Add</button>
         </div>
       </div>
     </div>
