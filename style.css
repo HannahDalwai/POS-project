@@ -14,3 +14,8 @@ img{
   #editBtn{
     float: right;
   }
+
+
+  .modal-backdrop{
+   z-index: -1;
+  }
