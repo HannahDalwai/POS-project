@@ -42,6 +42,30 @@
     </div>
   </div>
 
+
+  <div id="main-box">
+    <div>
+      <label for="" class="form-label">Sort by category</label>
+      <select name="categorySort" id="categorySort" onchange="categorySort()">
+        <option value="All">All</option>
+        <option value="Arts and crafts">Arts and crafts</option>
+        <option value="Stationary">Stationary</option>
+        <option value="Books">Books</option>
+        <option value="Education">Education</option>
+      </select>
+      <label for="" class="form-label">Sort by price</label>
+      <select name="priceSort" id="priceSort" onchange="priceSort()">
+        <option value=""></option>
+        <option value="Ascending">Ascending</option>
+        <option value="Descending">Descending</option>
+      </select>
+      <label for="" class="form-label">Sort by name</label>
+      <select name="sortName" id="sortName" onchange="sortName()">
+        <option value=""></option>
+        <option value="Ascending">Ascending</option>
+        <option value="Descending">Descending</option>
+      </select>
+    </div>
 <div id="products"></div>
 
   <div class="container mt-5 pt-4">
