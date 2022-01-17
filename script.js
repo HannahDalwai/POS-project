@@ -40,7 +40,7 @@ let products = JSON.parse(localStorage.getItem("products")) ? JSON.parse(localSt
         <div class="card d-inline-flex p-2 bd-highlight" style="width: 18rem;">
         <img id="img" class="card-img-top" src="${product.img}" alt="Card image cap">
         <div class="card-body">
-            <h3 id="title" class="card-title">${product.title}</h3>
+            <h4 id="title" class="card-title">${product.title}</h4>
             <h5 id="category" class="card-title">${product.category}</h5>
             <p id="price" class="card-text">R${product.price}</p>
             <div>
