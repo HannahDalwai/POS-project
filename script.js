@@ -45,9 +45,9 @@ let products = JSON.parse(localStorage.getItem("products")) ? JSON.parse(localSt
             <p id="price" class="card-text">R${product.price}</p>
             <div>
                 Quantity:
-                <input type="number" name="Quantity" class="form-control mb-2" id="quantity${position}" min="1" value="1">
+                <input type="number" name="Quantity" class="form-control mb-2" id="quantity${position}" min="1" value="1">            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal${position}"><i class='bx bxs-pencil'></i></button>
+
             <div/>
-            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal${position}">Edit</button>
             <button class="btn btn-danger" onclick="deleteProduct(${position})">Delete</button>
             <button class="btn btn-success mt-1" onclick="addToCart(${position})">Add to cart</button>
         </div>
@@ -108,16 +108,18 @@ function createProduct(){
 
 // DELETE
 function deleteProduct(position) {
-    let confirmation = confirm(
-      "Are you sure you want to delete the selected product?"
-    );
-  
-    if (confirmation) {
-      products.splice(position, 1);
-      localStorage.setItem("products", JSON.stringify(products));
-      displayProducts(products);
-    }
+  let confirmation = confirm(
+    "Are you sure you want to delete the selected product?"
+  );
+
+  if (confirmation) {
+    products.splice(position, 1);
+    localStorage.setItem("products", JSON.stringify(products));
+    displayProducts(products);
   }
+}
+
+
 
 // UPDATE
 function updateProduct(position){
@@ -205,59 +207,6 @@ function priceSort() {
     console.log(sortedProducts);
     displayProducts(products);
   }
-
-
-  // ADD TO CART
-function addToCart(position) {
-  let qty = document.querySelector(`#addToCart${position}`).value;
-  let added = false;
-  cart.forEach((product) => {
-    if (product.title == products[position].title) {
-      alert(
-        `You have successfully added ${qty} ${products[position].title} to the cart`
-      );
-      product.qty = parseInt(product.qty) + parseInt(qty);
-      added = true;
-    }
-  });
-  if (!added) {
-    cart.push({ ...products[position], qty });
-    alert(
-      `You have successfully added ${qty} ${products[position].title} to the cart`
-    );
-  }
-  // SORT BY NAME
-
-function sortName() {
-  let direction = document.querySelector("#sortName").value;
-
-  let sortedProducts = products.sort((a, b) => {
-    if (a.title.toLowerCase() < b.title.toLowerCase()) {
-      return -1;
-    }
-    if (a.title.toLowerCase() > b.title.toLowerCase()) {
-      return 1;
-    }
-    return 0;
-  });
-  if (direction == "descending") sortedProducts.reverse();
-  console.log(sortedProducts);
-  displayProducts(products);
-}
-
-// SORT BY PRICE
-
-function sortPrice() {
-  let direction = document.querySelector("#sortPrice").value;
-
-  let sortedProducts = products.sort((a, b) => a.price - b.price);
-
-  console.log(sortedProducts);
-
-  if (direction == "descending") sortedProducts.reverse();
-  displayProducts(sortedProducts);
-}
-
 
 
 
@@ -578,3 +527,4 @@ function sortPrice() {
 //   if (direction == "descending") sortedProducts.reverse();
 //   displayProducts(sortedProducts);
 // }
+
