@@ -15,12 +15,13 @@
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <h1">Stationary</h1>
-            <button  id="" class="btn btn-outline-success" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+            <button  id="" class="btn btn-outline-secondary" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+            <a href="cart.html"><button  id="" class="btn btn-outline-primary" type="button">Cart</button></a>  
         </div>
         </nav>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabposition="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -29,10 +30,10 @@
         </div>
         <div class="modal-body"> 
   
-        <input class="form-control w-50 mb-2" type="text" id="addImg" placeholder="Image URL">
-        <input class="form-control w-50 mb-2" type="text" id="addTitle" placeholder="Title">
-        <input class="form-control w-50 mb-2" type="text" id="addCategory" placeholder="Category">
-        <input class="form-control w-50 mb-2" type="text" id="addPrice" placeholder="Price">
+        <input class="form-control w-50 mb-2" type="text" id="img" placeholder="Image URL">
+        <input class="form-control w-50 mb-2" type="text" id="title" placeholder="Title">
+        <input class="form-control w-50 mb-2" type="text" id="category" placeholder="Category">
+        <input class="form-control w-50 mb-2" type="text" id="price" placeholder="Price">
   
         </div>
         <div class="modal-footer">
@@ -42,11 +43,8 @@
       </div>
     </div>
   </div>
-  
 
-
-
-
+<div id="products"></div>
 
   <div class="container mt-5 pt-4">
     <div id="cart"></div>
