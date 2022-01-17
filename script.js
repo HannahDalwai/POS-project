@@ -1,5 +1,5 @@
-let products = [
-
+let products = JSON.parse(localStorage.getItem("products")) ? JSON.parse(localStorage.getItem("products")) : 
+[
   {
   title:"Watercolour set",
   category:"Paint",
@@ -28,6 +28,10 @@ let products = [
   },    
   ]
   console.log(products);
+  let cart = JSON.parse(localStorage.getItem("cart"))
+  ? JSON.parse(localStorage.getItem("cart"))
+  : [];
+
   function displayProducts(products){
     document.querySelector("#products").innerHTML = "";
 
@@ -77,43 +81,64 @@ let products = [
     });
 }
 displayProducts(products);
-
+// CREATE
 function createProduct(){
     let img = document.querySelector("#img").value;
     let title = document.querySelector("#title").value;
     let category = document.querySelector("#category").value;
     let price = document.querySelector("#price").value;
 
-    products.push({
-        title: title,
-        category,
-        price,
-        img
-    })
-    localStorage.setItem("products", JSON.stringify(products))
-    displayProducts(products);
-}
 
-function deleteProduct(position){
-    products.splice(position, 1);
-    localStorage.setItem("products", JSON.stringify(products))
-    displayProducts(products);
-}
 
+    try {
+          if (!title || !price || !img) throw new Error("Please fill in all fields");
+          products.push({
+            title,
+            category,
+            price,
+            img,
+          });
+          localStorage.setItem("products", JSON.stringify(products));
+          displayProducts(products);
+        } catch (err) {
+          alert(err);
+        }
+      }
+      
+
+// DELETE
+function deleteProduct(position) {
+    let confirmation = confirm(
+      "Are you sure you want to delete the selected product?"
+    );
+  
+    if (confirmation) {
+      products.splice(position, 1);
+      localStorage.setItem("products", JSON.stringify(products));
+      displayProducts(products);
+    }
+  }
+
+// UPDATE
 function updateProduct(position){
     let img = document.querySelector(`#imgEdit${position}`).value;
     let title = document.querySelector(`#titleEdit${position}`).value;
     let category = document.querySelector(`#categoryEdit${position}`).value;
     let price = document.querySelector(`#priceEdit${position}`).value;
-        products[position] = {
-            title: title,
+    try {
+          if (!title || !price || !img) throw new Error("Please fill in all fields");
+          products[position] = {
+            title,
             category,
             price,
-            img
-            };
-        localStorage.setItem("products", JSON.stringify(products))
-        displayProducts(products);
-}
+            img,
+          };
+          localStorage.setItem("products", JSON.stringify(products));
+          displayProducts(products);
+        } catch (err) {
+          alert(err);
+        }
+      }
 
 
 function addToCart(position){
@@ -180,6 +205,59 @@ function priceSort() {
     console.log(sortedProducts);
     displayProducts(products);
   }
+
+
+  // ADD TO CART
+function addToCart(position) {
+  let qty = document.querySelector(`#addToCart${position}`).value;
+  let added = false;
+  cart.forEach((product) => {
+    if (product.title == products[position].title) {
+      alert(
+        `You have successfully added ${qty} ${products[position].title} to the cart`
+      );
+      product.qty = parseInt(product.qty) + parseInt(qty);
+      added = true;
+    }
+  });
+  if (!added) {
+    cart.push({ ...products[position], qty });
+    alert(
+      `You have successfully added ${qty} ${products[position].title} to the cart`
+    );
+  }
+  // SORT BY NAME
+
+function sortName() {
+  let direction = document.querySelector("#sortName").value;
+
+  let sortedProducts = products.sort((a, b) => {
+    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+      return -1;
+    }
+    if (a.title.toLowerCase() > b.title.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  });
+  if (direction == "descending") sortedProducts.reverse();
+  console.log(sortedProducts);
+  displayProducts(products);
+}
+
+// SORT BY PRICE
+
+function sortPrice() {
+  let direction = document.querySelector("#sortPrice").value;
+
+  let sortedProducts = products.sort((a, b) => a.price - b.price);
+
+  console.log(sortedProducts);
+
+  if (direction == "descending") sortedProducts.reverse();
+  displayProducts(sortedProducts);
+}
+
 
 
 
@@ -500,4 +578,3 @@ function priceSort() {
 //   if (direction == "descending") sortedProducts.reverse();
 //   displayProducts(sortedProducts);
 // }
-
