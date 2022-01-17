@@ -44,12 +44,14 @@ let products = JSON.parse(localStorage.getItem("products")) ? JSON.parse(localSt
             <h5 id="category" class="card-title">${product.category}</h5>
             <p id="price" class="card-text">R${product.price}</p>
             <div>
-                Quantity:
-                <input type="number" name="Quantity" class="form-control mb-2" id="quantity${position}" min="1" value="1">            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal${position}"><i class='bx bxs-pencil'></i></button>
+            <button class="btn btn-danger" onclick="deleteProduct(${position})">Delete</button>
+            <button id="editBtn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal${position}"><i class='bx bxs-pencil'></i></button>
+
+        <p> Quantity:</p>
+                <input type="number" name="Quantity" class="form-control mb-2" id="quantity${position}" min="1" value="1">
+                <button class="btn btn-success mt-1" onclick="addToCart(${position})">Add to cart</button>
 
             <div/>
-            <button class="btn btn-danger" onclick="deleteProduct(${position})">Delete</button>
-            <button class="btn btn-success mt-1" onclick="addToCart(${position})">Add to cart</button>
         </div>
         </div>
     
